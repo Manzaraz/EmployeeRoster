@@ -47,6 +47,7 @@ class EmployeeDetailTableViewController: UITableViewController, UITextFieldDeleg
             employeeTypeLabel.textColor = .label
         } else {
             navigationItem.title = "New Employee"
+            prepareDobPicker()
         }
     }
     
@@ -114,6 +115,22 @@ class EmployeeDetailTableViewController: UITableViewController, UITextFieldDeleg
         employeeTypeLabel.textColor = .black
         employeeTypeLabel.text = employeeType.description
         updateSaveButtonState()
+    }
+    
+    // MARK: - Challenge solution
+    private func prepareDobPicker()  {
+        var dateComponents  = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        dateComponents.calendar = Calendar.current
+        
+        guard let currentYear = dateComponents.year else { return }
+        
+        dateComponents.month = 6
+        dateComponents.day = 15
+        
+        /* Presuming the youngest employee is 16 and the oldest is 65. The age range between (65-16) is 49 year, the middle of that range(49/2) is 24.5. Offsetting by 16 we find that the presumed middle aged employee es 24.5 + 16 = 40.5. Rounding down, we can set our date picker's years to today's year - 40*/
+        dateComponents.year = (currentYear - 40)
+        
+        dobDatePicker.date = dateComponents.date ?? Date()
     }
 
 }
