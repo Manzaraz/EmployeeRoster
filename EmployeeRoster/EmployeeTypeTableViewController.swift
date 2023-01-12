@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol EmployeeTypeTableViewControllerDelegate: AnyObject {
+protocol EmployeeTypeTableViewControllerDelegate {
     func employeeTypeTableViewController(_ controller: EmployeeTypeTableViewController, didSelect employeeType: EmployeeType)
 }
 
